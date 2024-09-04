@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact name="stuff:jar2">
+    <output-path>$PROJECT_DIR$/out/artifacts/stuff_jar2</output-path>
+    <root id="root">
+      <element id="archive" name="stuff.jar">
+        <element id="module-output" name="stuff" />
+      </element>
+      <element id="library" level="project" name="Maven: commons-codec:commons-codec:1.17.0" />
+    </root>
+  </artifact>
+</component>
