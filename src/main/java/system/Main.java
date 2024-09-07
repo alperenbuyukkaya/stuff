@@ -1,22 +1,20 @@
 package system;
 
 
-import org.apache.commons.codec.cli.Digest;
 import org.apache.commons.codec.digest.DigestUtils;
-import java.io.Console;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {
         Scanner mainScanner = new Scanner(System.in);
-        UIHandler mainUI = new UIHandler(mainScanner);
         FileHandler fileHandler = new FileHandler();
+        UIHandler mainUI = new UIHandler(mainScanner, fileHandler);
         System.out.println("Welcome");
         if (fileHandler.checkDatabase()){
             while (true){
                 System.out.print("Enter username: ");
+                System.out.flush();
                 String inputUser = mainUI.getInput();
                 if (inputUser.equals(fileHandler.readFile(0))){
                     String passwordInput = DigestUtils.sha256Hex(UIHandler.getPassword());
@@ -35,11 +33,12 @@ public class Main {
                 System.out.println("Username: ");
                 String inputUser = mainUI.getInput();
                 String passwordInput = DigestUtils.sha256Hex(UIHandler.getPassword());
-                System.out.println(passwordInput);
                 fileHandler.writeToFile(inputUser,0);
                 fileHandler.writeToFile(passwordInput,1);
                 break;
             }
         }
+        mainUI.clearScreen();
+        mainUI.mainMenuStart();
     }
 }
